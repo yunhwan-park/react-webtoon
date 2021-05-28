@@ -73,3 +73,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 # 참고 URL 
 https://ibrahimovic.tistory.com/32
 https://ibrahimovic.tistory.com/31?category=711523
+
+
+
+npm install 
+
+npm start
+
+http://localhost:3000
+
