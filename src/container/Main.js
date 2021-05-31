@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import Header from "../component/Header";
 import Gnb from "../component/Gnb";
-import Footer from "../component/Header";
+import Footer from "../component/Footer";
 import WebtoonList from "../component/WebtoonList"
 
 class Main extends Component {
@@ -12,8 +12,11 @@ class Main extends Component {
     {
         super(props);
 
+        const query = new URLSearchParams(props.location.search);
+        const day = query.get('day');           // query string 으로 day 값 얻음
+
         this.state = {
-            day: 'mon',         // 디폴트로 월요일
+            day: day || 'mon',         // 디폴트로 월요일
             webtoonList : []    // 기초 리스트는 비어있습니다.
         };
     }
@@ -21,6 +24,21 @@ class Main extends Component {
     componentDidMount()
     {
         this._getList();
+    }
+
+    componentDidUpdate(preProps)
+    {
+        // 요일이 바뀌면 다시 setState 처리
+        let prevQuery = new URLSearchParams(preProps.location.search);
+        let prevDay = prevQuery.get('day');
+
+        let query = new URLSearchParams(this.props.location.search);
+        let day = query.get('day');
+
+        if(prevDay !== day)
+        {
+            this.setState({ day })
+        }
     }
 
     _getList()
